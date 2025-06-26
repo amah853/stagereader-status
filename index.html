@@ -1,0 +1,686 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>System Status - StageReader</title>
+    <link rel="icon" type="image/png" href="https://stagereader.ahmad-mahrous.com/assets/favicon.png">
+    <link type="stylesheet" href=/styles.css">
+    <script>
+        // ========================================
+        // 🔧 CONFIGURATION - EDIT EVERYTHING HERE
+        // ========================================
+
+        const STATUS_CONFIG = {
+            // Status definitions
+            statusTypes: {
+                operational: { name: 'Operational', color: '#22c55e', priority: 1 },
+                degraded: { name: 'Degraded', color: '#f59e0b', priority: 2 },
+                partial: { name: 'Partial Outage', color: '#ef4444', priority: 3 },
+                major: { name: 'Major Outage', color: '#dc2626', priority: 4 },
+                critical: { name: 'Critical Failure', color: '#991b1b', priority: 5 }
+            },
+
+            // Overall status messages
+            overallMessages: {
+                operational: {
+                    title: 'All Systems Operational',
+                    description: 'All services are running smoothly with no reported issues'
+                },
+                degraded: {
+                    title: 'Some Systems Experiencing Issues',
+                    description: 'Some services may be slower than usual, but core functionality remains available'
+                },
+                partial: {
+                    title: 'Partial Service Disruption',
+                    description: 'Some services are experiencing significant issues that may affect functionality'
+                },
+                major: {
+                    title: 'Major Service Disruption',
+                    description: 'Multiple services are experiencing major issues affecting most users'
+                },
+                critical: {
+                    title: 'Critical System Failure',
+                    description: 'Critical services are down and we are working to restore them immediately'
+                }
+            },
+
+            // Services configuration - EVERY service has incident config (hidden if operational)
+          // Statuses: operational, degraded, partial, major, critical
+          // Stages: investigating, solving, resolved
+            services: [
+              STATUS_CONFIG.services = [
+    {
+        name: 'Core App Availability',
+        icon: '🌐',
+        description: 'Main application and user interface',
+        status: 'operational',
+        incident: {
+            title: 'No current incidents',
+            description: '',
+            stages: ['resolved'],
+            startTime: ''
+        }
+    },
+    {
+        name: 'User Authentication (Google/Firebase)',
+        icon: '🔐',
+        description: 'User login, registration, and session management',
+        status: 'operational',
+        incident: {
+            title: 'No current incidents',
+            description: '',
+            stages: ['resolved'],
+            startTime: ''
+        }
+    },
+    {
+        name: 'Account Management (Profile, Email, Password)',
+        icon: '👤',
+        description: 'User profile and account settings',
+        status: 'operational',
+        incident: {
+            title: 'No current incidents',
+            description: '',
+            stages: ['resolved'],
+            startTime: ''
+        }
+    },
+    {
+        name: 'Signup & Login Flows',
+        icon: '📝',
+        description: 'User signup and login processes',
+        status: 'operational',
+        incident: {
+            title: 'No current incidents',
+            description: '',
+            stages: ['resolved'],
+            startTime: ''
+        }
+    },
+    {
+        name: 'Password Reset',
+        icon: '🔄',
+        description: 'Password recovery and reset',
+        status: 'operational',
+        incident: {
+            title: 'No current incidents',
+            description: '',
+            stages: ['resolved'],
+            startTime: ''
+        }
+    },
+    {
+        name: 'Account Deletion',
+        icon: '❌',
+        description: 'Account removal process',
+        status: 'operational',
+        incident: {
+            title: 'No current incidents',
+            description: '',
+            stages: ['resolved'],
+            startTime: ''
+        }
+    },
+    {
+        name: 'Session Persistence / Auth State',
+        icon: '🔄',
+        description: 'Maintaining user sessions and auth state',
+        status: 'operational',
+        incident: {
+            title: 'No current incidents',
+            description: '',
+            stages: ['resolved'],
+            startTime: ''
+        }
+    },
+    {
+        name: 'Version Checker / Auto-Update',
+        icon: '⚙️',
+        description: 'Version checking and app auto-updates',
+        status: 'operational',
+        incident: {
+            title: 'No current incidents',
+            description: '',
+            stages: ['resolved'],
+            startTime: ''
+        }
+    },
+    {
+        name: 'Mobile Responsiveness',
+        icon: '📱',
+        description: 'Responsive design on mobile devices',
+        status: 'operational',
+        incident: {
+            title: 'No current incidents',
+            description: '',
+            stages: ['resolved'],
+            startTime: ''
+        }
+    },
+    {
+        name: 'Dark/Light Mode Switching',
+        icon: '🌗',
+        description: 'Theme switching between dark and light modes',
+        status: 'operational',
+        incident: {
+            title: 'No current incidents',
+            description: '',
+            stages: ['resolved'],
+            startTime: ''
+        }
+    },
+    {
+        name: 'Premium & Billing',
+        icon: '💳',
+        description: 'Premium subscription management and billing',
+        status: 'operational',
+        incident: {
+            title: 'No current incidents',
+            description: '',
+            stages: ['resolved'],
+            startTime: ''
+        }
+    },
+    {
+        name: 'Premium Subscription Activation',
+        icon: '✨',
+        description: 'Activating premium subscription access',
+        status: 'operational',
+        incident: {
+            title: 'No current incidents',
+            description: '',
+            stages: ['resolved'],
+            startTime: ''
+        }
+    },
+    {
+        name: 'Stripe Checkout / Billing Portal',
+        icon: '💳',
+        description: 'Stripe payment processing and billing portal',
+        status: 'operational',
+        incident: {
+            title: 'No current incidents',
+            description: '',
+            stages: ['resolved'],
+            startTime: ''
+        }
+    },
+    {
+        name: 'Premium Feature Access',
+        icon: '🔑',
+        description: 'Access to premium features',
+        status: 'operational',
+        incident: {
+            title: 'No current incidents',
+            description: '',
+            stages: ['resolved'],
+            startTime: ''
+        }
+    },
+    {
+        name: 'Premium Status Sync (Firestore)',
+        icon: '📡',
+        description: 'Synchronizing premium status with Firestore',
+        status: 'operational',
+        incident: {
+            title: 'No current incidents',
+            description: '',
+            stages: ['resolved'],
+            startTime: ''
+        }
+    },
+    {
+        name: 'Billing History Display',
+        icon: '🧾',
+        description: 'Display of user billing and payment history',
+        status: 'operational',
+        incident: {
+            title: 'No current incidents',
+            description: '',
+            stages: ['resolved'],
+            startTime: ''
+        }
+    },
+    {
+        name: 'Enterprise License Management',
+        icon: '🏢',
+        description: 'Management of enterprise licenses',
+        status: 'operational',
+        incident: {
+            title: 'No current incidents',
+            description: '',
+            stages: ['resolved'],
+            startTime: ''
+        }
+    },
+    {
+        name: 'Non-Profit Bulk License',
+        icon: '🎗️',
+        description: 'Bulk license management for non-profit organizations',
+        status: 'operational',
+        incident: {
+            title: 'No current incidents',
+            description: '',
+            stages: ['resolved'],
+            startTime: ''
+        }
+    },
+    {
+        name: 'File & Script Management',
+        icon: '📁',
+        description: 'Uploading, storing, and managing files and scripts',
+        status: 'operational',
+        incident: {
+            title: 'No current incidents',
+            description: '',
+            stages: ['resolved'],
+            startTime: ''
+        }
+    },
+    {
+        name: 'PDF Upload & Viewing',
+        icon: '📄',
+        description: 'Uploading and viewing PDF documents',
+        status: 'operational',
+        incident: {
+            title: 'No current incidents',
+            description: '',
+            stages: ['resolved'],
+            startTime: ''
+        }
+    },
+    {
+        name: 'PDF Annotation Tools',
+        icon: '✏️',
+        description: 'Tools for annotating PDF files',
+        status: 'operational',
+        incident: {
+            title: 'No current incidents',
+            description: '',
+            stages: ['resolved'],
+            startTime: ''
+        }
+    },
+    {
+        name: 'Google Drive Integration (Import/Export)',
+        icon: '🟢',
+        description: 'Google Drive import and export functionality',
+        status: 'operational',
+        incident: {
+            title: 'No current incidents',
+            description: '',
+            stages: ['resolved'],
+            startTime: ''
+        }
+    },
+    {
+        name: 'Dual Monitor Mode',
+        icon: '🖥️🖥️',
+        description: 'Support for dual monitor setup',
+        status: 'operational',
+        incident: {
+            title: 'No current incidents',
+            description: '',
+            stages: ['resolved'],
+            startTime: ''
+        }
+    },
+    {
+        name: 'Cloud Storage (Firebase Storage)',
+        icon: '☁️',
+        description: 'File storage in Firebase Storage',
+        status: 'operational',
+        incident: {
+            title: 'No current incidents',
+            description: '',
+            stages: ['resolved'],
+            startTime: ''
+        }
+    },
+    {
+        name: 'Instant Navigation/Search',
+        icon: '🔍',
+        description: 'Fast navigation and search across app',
+        status: 'operational',
+        incident: {
+            title: 'No current incidents',
+            description: '',
+            stages: ['resolved'],
+            startTime: ''
+        }
+    },
+    {
+        name: 'UI & User Experience',
+        icon: '🎨',
+        description: 'User interface and experience design',
+        status: 'operational',
+        incident: {
+            title: 'No current incidents',
+            description: '',
+            stages: ['resolved'],
+            startTime: ''
+        }
+    },
+    {
+        name: 'Screenshots & Preview Gallery',
+        icon: '🖼️',
+        description: 'Screenshot capture and preview gallery',
+        status: 'operational',
+        incident: {
+            title: 'No current incidents',
+            description: '',
+            stages: ['resolved'],
+            startTime: ''
+        }
+    },
+    {
+        name: 'Daily Tips / Onboarding',
+        icon: '💡',
+        description: 'Daily tips and onboarding guides',
+        status: 'operational',
+        incident: {
+            title: 'No current incidents',
+            description: '',
+            stages: ['resolved'],
+            startTime: ''
+        }
+    },
+    {
+        name: 'Error & Success Message Display',
+        icon: '✅❌',
+        description: 'User feedback through messages',
+        status: 'operational',
+        incident: {
+            title: 'No current incidents',
+            description: '',
+            stages: ['resolved'],
+            startTime: ''
+        }
+    },
+    {
+        name: 'Accessibility Features',
+        icon: '♿',
+        description: 'Accessibility and assistive technology support',
+        status: 'operational',
+        incident: {
+            title: 'No current incidents',
+            description: '',
+            stages: ['resolved'],
+            startTime: ''
+        }
+    },
+    {
+        name: 'Responsive Sidebar & Navigation',
+        icon: '📚',
+        description: 'Sidebar and navigation responsiveness',
+        status: 'operational',
+        incident: {
+            title: 'No current incidents',
+            description: '',
+            stages: ['resolved'],
+            startTime: ''
+        }
+    },
+    {
+        name: 'Theme/Style Asset Delivery',
+        icon: '🎭',
+        description: 'Theme and style assets delivery',
+        status: 'operational',
+        incident: {
+            title: 'No current incidents',
+            description: '',
+            stages: ['resolved'],
+            startTime: ''
+        }
+    },
+    {
+        name: 'Service Worker / Offline Support',
+        icon: '🛠️',
+        description: 'Offline support via service workers',
+        status: 'operational',
+        incident: {
+            title: 'No current incidents',
+            description: '',
+            stages: ['resolved'],
+            startTime: ''
+        }
+    }
+],
+
+            // Performance metrics
+            /* metrics: [
+                { label: 'Uptime (30 days)', value: '99.9%' },
+                { label: 'Avg Response Time', value: '245ms' },
+                { label: 'Active Incidents', value: '1' },
+                { label: 'Scripts Served Today', value: '1.2M' }
+            ],
+*/
+            // Recent history
+            /* history: [
+                {
+                    date: 'Jan 15, 2024',
+                    status: 'degraded',
+                    description: 'Script Library experiencing slower response times - investigating'
+                },
+                {
+                    date: 'Jan 12, 2024',
+                    status: 'operational',
+                    description: 'Scheduled maintenance completed successfully'
+                },
+                {
+                    date: 'Jan 10, 2024',
+                    status: 'operational',
+                    description: 'Brief authentication service interruption - resolved in 15 minutes'
+                },
+                {
+                    date: 'Jan 8, 2024',
+                    status: 'operational',
+                    description: 'Database optimization completed, improved performance by 25%'
+                }
+            ]
+        };
+        */
+    </script>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <div class="logo-section">
+                <div class="logo">
+                    <img src="/assets/favicon" alt="StageReader" class="logo-icon">
+                    <div class="logo-text">StageReader</div>
+                </div>
+            </div>
+            <h1 class="page-title">System Status</h1>
+            <p class="page-subtitle">Real-time status and performance monitoring for all StageReader services</p>
+        </div>
+
+        <!-- Overall Status (Auto-generated) -->
+        <div class="overall-status" id="overallStatus">
+            <div class="overall-status-text" id="overallStatusText">Loading...</div>
+            <div class="overall-status-desc" id="overallStatusDesc">Checking system status...</div>
+            <div class="last-updated">Last updated: <span id="lastUpdated">Loading...</span></div>
+        </div>
+
+        <!-- Services Grid (Auto-generated) -->
+        <div class="services-grid" id="servicesGrid">
+            <!-- Services will be generated from config -->
+        </div>
+
+        <!-- Performance Metrics (Auto-generated) -->
+        <div class="metrics-section">
+            <h2 class="metrics-title">📈 Performance Metrics</h2>
+            <div class="metrics-grid" id="metricsGrid">
+                <!-- Metrics will be generated from config -->
+            </div>
+        </div>
+
+        <!-- Recent History (Auto-generated) -->
+        <div class="history-section">
+            <h2 class="history-title">📅 Recent History</h2>
+            <div id="historyContainer">
+                <!-- History will be generated from config -->
+            </div>
+        </div>
+
+        <!-- Subscribe Section -->
+        <div class="subscribe-section">
+            <a href="#" class="btn btn-primary">📧 Subscribe to Updates</a>
+            <a href="#" class="btn btn-secondary">📱 Get Mobile Alerts</a>
+            <a href="/" class="btn btn-secondary">🏠 Back to Home</a>
+        </div>
+    </div>
+
+    <script>
+        // ========================================
+        // 🚀 AUTO-GENERATION CODE (DON'T EDIT)
+        // ========================================
+
+        function calculateOverallStatus() {
+            let highestPriority = 1;
+            let worstStatus = 'operational';
+
+            STATUS_CONFIG.services.forEach(service => {
+                const priority = STATUS_CONFIG.statusTypes[service.status].priority;
+                if (priority > highestPriority) {
+                    highestPriority = priority;
+                    worstStatus = service.status;
+                }
+            });
+
+            return worstStatus;
+        }
+
+        function updateOverallStatus() {
+            const overallStatus = calculateOverallStatus();
+            const statusInfo = STATUS_CONFIG.statusTypes[overallStatus];
+            const message = STATUS_CONFIG.overallMessages[overallStatus];
+
+            const overallElement = document.getElementById('overallStatus');
+            const textElement = document.getElementById('overallStatusText');
+            const descElement = document.getElementById('overallStatusDesc');
+
+            overallElement.style.setProperty('--status-color', statusInfo.color);
+            textElement.textContent = message.title;
+            textElement.style.color = statusInfo.color;
+            descElement.textContent = message.description;
+        }
+
+        function generateServices() {
+            const grid = document.getElementById('servicesGrid');
+            grid.innerHTML = '';
+
+            STATUS_CONFIG.services.forEach(service => {
+                const statusInfo = STATUS_CONFIG.statusTypes[service.status];
+                
+                const serviceCard = document.createElement('div');
+                serviceCard.className = 'service-card';
+                
+                // Show incident info only if status is NOT operational
+                let incidentHtml = '';
+                if (service.status !== 'operational' && service.incident) {
+                    const stagesHtml = ['investigating', 'solving', 'resolved']
+                        .map(stage => {
+                            const isVisible = service.incident.stages.includes(stage);
+                            return `<div class="stage stage-${stage} ${isVisible ? '' : 'hidden'}">${stage}</div>`;
+                        }).join('');
+
+                    incidentHtml = `
+                        <div class="incident-info show">
+                            <div class="incident-title">${service.incident.title}</div>
+                            <div class="incident-description">${service.incident.description}</div>
+                            <div class="incident-stages">${stagesHtml}</div>
+                            <div class="incident-time">Started: ${service.incident.startTime}</div>
+                        </div>
+                    `;
+                }
+
+                serviceCard.innerHTML = `
+                    <div class="service-header">
+                        <div class="service-name">
+                            <span class="service-icon">${service.icon}</span>
+                            ${service.name}
+                        </div>
+                        <div class="status-badge status-${service.status}">${statusInfo.name}</div>
+                    </div>
+                    <div class="service-description">${service.description}</div>
+                    ${incidentHtml}
+                `;
+
+                // Only add click handler if there's an incident to show
+                if (service.status !== 'operational' && service.incident) {
+                    serviceCard.addEventListener('click', function() {
+                        const incident = this.querySelector('.incident-info');
+                        if (incident) {
+                            incident.classList.toggle('show');
+                        }
+                    });
+                }
+
+                grid.appendChild(serviceCard);
+            });
+        }
+
+        function generateMetrics() {
+            const grid = document.getElementById('metricsGrid');
+            grid.innerHTML = '';
+
+            STATUS_CONFIG.metrics.forEach(metric => {
+                const metricCard = document.createElement('div');
+                metricCard.className = 'metric-card';
+                metricCard.innerHTML = `
+                    <div class="metric-value">${metric.value}</div>
+                    <div class="metric-label">${metric.label}</div>
+                `;
+                grid.appendChild(metricCard);
+            });
+        }
+
+        function generateHistory() {
+            const container = document.getElementById('historyContainer');
+            container.innerHTML = '';
+
+            STATUS_CONFIG.history.forEach(item => {
+                const statusInfo = STATUS_CONFIG.statusTypes[item.status];
+                const historyItem = document.createElement('div');
+                historyItem.className = 'history-item';
+                historyItem.innerHTML = `
+                    <div class="history-date">${item.date}</div>
+                    <div class="history-status">
+                        <div class="status-badge status-${item.status}">${item.status === 'operational' ? 'Resolved' : statusInfo.name}</div>
+                    </div>
+                    <div class="history-description">${item.description}</div>
+                `;
+                container.appendChild(historyItem);
+            });
+        }
+
+        function updateLastUpdated() {
+            const now = new Date();
+            const formatted = now.toLocaleDateString('en-US', { 
+                year: 'numeric', 
+                month: 'long', 
+                day: 'numeric',
+                hour: 'numeric',
+                minute: '2-digit',
+                timeZoneName: 'short'
+            });
+            document.getElementById('lastUpdated').textContent = formatted;
+        }
+
+        // Initialize everything
+        document.addEventListener('DOMContentLoaded', function() {
+            updateOverallStatus();
+            generateServices();
+            generateMetrics();
+            generateHistory();
+            updateLastUpdated();
+        });
+
+        // Auto-refresh every 30 seconds
+        setInterval(updateLastUpdated, 30000);
+    </script>
+</body>
+</html>
