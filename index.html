@@ -49,7 +49,6 @@
           // Statuses: operational, degraded, partial, major, critical
           // Stages: investigating, solving, resolved
             services: [
-              STATUS_CONFIG.services = [
     {
         name: 'Core App Availability',
         icon: '🌐',
@@ -233,15 +232,15 @@
 ],
 
             // Performance metrics
-            /* metrics: [
+            metrics: [
                 { label: 'Uptime (30 days)', value: '99.9%' },
                 { label: 'Avg Response Time', value: '245ms' },
                 { label: 'Active Incidents', value: '1' },
                 { label: 'Scripts Served Today', value: '1.2M' }
             ],
-*/
+
             // Recent history
-            /* history: [
+            history: [
                 {
                     date: 'Jan 15, 2024',
                     status: 'degraded',
@@ -264,7 +263,6 @@
                 }
             ]
         };
-        */
     </script>
 </head>
 <body>
@@ -273,7 +271,7 @@
         <div class="header">
             <div class="logo-section">
                 <div class="logo">
-                    <img src="/assets/favicon" alt="StageReader" class="logo-icon">
+                    <img src="/assets/favicon.png" alt="StageReader Logo" class="logo-icon" />
                     <div class="logo-text">StageReader</div>
                 </div>
             </div>
@@ -335,7 +333,7 @@
             });
 
             return worstStatus;
-        }
+        };
 
         function updateOverallStatus() {
             const overallStatus = calculateOverallStatus();
@@ -350,7 +348,7 @@
             textElement.textContent = message.title;
             textElement.style.color = statusInfo.color;
             descElement.textContent = message.description;
-        }
+        };
 
         function generateServices() {
             const grid = document.getElementById('servicesGrid');
@@ -379,7 +377,7 @@
                             <div class="incident-time">Started: ${service.incident.startTime}</div>
                         </div>
                     `;
-                }
+                };
 
                 serviceCard.innerHTML = `
                     <div class="service-header">
