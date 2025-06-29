@@ -196,15 +196,31 @@
 
         // Initialize everything, but wait for STATUS_CONFIG to be available
         function initializeStatusPage() {
-            if (typeof STATUS_CONFIG === 'undefined') {
-                setTimeout(initializeStatusPage, 50);
-                return;
+            // Hide the loading text immediately
+            var lastUpdatedElem = document.getElementById('lastUpdated');
+            if (lastUpdatedElem && lastUpdatedElem.textContent === 'Loading...') {
+                lastUpdatedElem.textContent = 'Fetching...';
             }
-            updateOverallStatus();
-            generateServices();
-            generateMetrics();
-            generateHistory();
-            updateLastUpdated();
+            // Dynamically reload config.js by removing and re-adding the script tag
+            var oldScript = document.querySelector('script[src="/config.js"]');
+            if (oldScript) {
+                oldScript.parentNode.removeChild(oldScript);
+            }
+            var newScript = document.createElement('script');
+            newScript.src = '/config.js?_=' + Date.now(); // cache-bust
+            newScript.onload = function() {
+                // Wait for STATUS_CONFIG to be available
+                if (typeof STATUS_CONFIG === 'undefined') {
+                    setTimeout(initializeStatusPage, 50);
+                    return;
+                }
+                updateOverallStatus();
+                generateServices();
+                generateMetrics();
+                generateHistory();
+                updateLastUpdated();
+            };
+            document.head.appendChild(newScript);
         }
 
         document.addEventListener('DOMContentLoaded', function() {
@@ -212,7 +228,7 @@
         });
 
         // Auto-refresh every 30 seconds
-        setInterval(updateLastUpdated, 30000);
+        setInterval(initializeStatusPage, 30000);
     </script>
 </body>
 </html>
