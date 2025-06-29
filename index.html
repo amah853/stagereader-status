@@ -20,6 +20,7 @@
             </div>
             <h1 class="page-title">System Status</h1>
             <p class="page-subtitle">Real-time status and performance monitoring for all StageReader services</p>
+            <p class="page-subtitle">Next Scheduled Update (V2.1.0): July 15th. No downtime anticipated.</p>
         </div>
 
         <!-- Overall Status (Auto-generated) -->
@@ -193,13 +194,21 @@
             document.getElementById('lastUpdated').textContent = formatted;
         }
 
-        // Initialize everything
-        document.addEventListener('DOMContentLoaded', function() {
+        // Initialize everything, but wait for STATUS_CONFIG to be available
+        function initializeStatusPage() {
+            if (typeof STATUS_CONFIG === 'undefined') {
+                setTimeout(initializeStatusPage, 50);
+                return;
+            }
             updateOverallStatus();
             generateServices();
             generateMetrics();
             generateHistory();
             updateLastUpdated();
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            initializeStatusPage();
         });
 
         // Auto-refresh every 30 seconds

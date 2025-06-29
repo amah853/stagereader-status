@@ -178,12 +178,12 @@
         name: 'Google Drive Integration (Import/Export)',
         icon: '🟢',
         description: 'Google Drive import and export functionality',
-        status: 'operational',
+        status: 'partial',
         incident: {
-            title: 'No current incidents',
-            description: '',
-            stages: ['resolved'],
-            startTime: ''
+            title: 'Error importing from Google Drive',
+            description: 'Some users are experiencing issues importing files from Google Drive. We are currently investigating the cause.',
+            stages: ['investigating'],
+            startTime: '7:32 PM UTC'
         }
     },
     {
