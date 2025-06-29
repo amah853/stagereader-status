@@ -46,12 +46,12 @@
         name: 'Core App Availability',
         icon: '🌐',
         description: 'Main application and user interface',
-        status: 'operational',
+        status: 'degraded',
         incident: {
-            title: 'No current incidents',
-            description: '',
-            stages: ['resolved'],
-            startTime: ''
+            title: 'Mobile users experiencing issues',
+            description: 'Mobile users (without PWA install) may experience a blank white box covering a small section of the app. This is a known issue and we are working on a fix.',
+            stages: ['solving'],
+            startTime: 'June 28, 7:47 PM UTC'
         }
     },
     {
@@ -183,7 +183,7 @@
             title: 'Error importing from Google Drive',
             description: 'Some users are experiencing issues importing files from Google Drive. We are currently investigating the cause.',
             stages: ['investigating'],
-            startTime: '7:32 PM UTC'
+            startTime: 'June 28, 7:32 PM UTC'
         }
     },
     {
