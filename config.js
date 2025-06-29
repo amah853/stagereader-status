@@ -49,7 +49,7 @@
         status: 'degraded',
         incident: {
             title: 'Mobile users experiencing issues',
-            description: 'Mobile users (without PWA install) may experience a blank white box covering a small section of the app. This is a known issue and we are working on a fix.',
+            description: 'Mobile users (without PWA install) may experience a blank white box covering a small section of the app.',
             stages: ['solving'],
             startTime: 'June 28, 7:47 PM UTC'
         }
